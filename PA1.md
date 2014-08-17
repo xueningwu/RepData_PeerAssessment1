@@ -1,7 +1,8 @@
-# Reproducible Research: Peer Assessment 1
-# Dear classmates, if you cannot see the png picture, please open the HTML with this link
-http://htmlpreview.github.io/?https://github.com/xueningwu/RepData_PeerAssessment1/blob/master/PA1.html, which shall be display correctly, thank you!
+# Dear classmates, if the png picture can not be displayed correctly, please open the HTML with below link
+http://htmlpreview.github.io/?https://github.com/xueningwu/RepData_PeerAssessment1/blob/master/PA1.html, which shall be display correctly
+# Thank you very much!!!
 
+# Reproducible Research: Peer Assessment 1
 1. set workdir
 2. read CSV data 
 3. remove NA
