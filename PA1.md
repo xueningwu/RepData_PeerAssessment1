@@ -1,7 +1,3 @@
-# Dear classmates, if the png picture can not be displayed correctly, please open the HTML with below link
-http://htmlpreview.github.io/?https://github.com/xueningwu/RepData_PeerAssessment1/blob/master/PA1.html, which shall be display correctly
-# Thank you very much!!!
-
 # Reproducible Research: Peer Assessment 1
 1. set workdir
 2. read CSV data 
@@ -11,6 +7,7 @@ http://htmlpreview.github.io/?https://github.com/xueningwu/RepData_PeerAssessmen
 
 ```r
 setwd("c://temp")
+par(mfrow = c(1,1), mar=c(6,8,2,4) )
 activity <- read.csv("activity.csv")
 activity_nona <- na.omit(activity)
 daysum<-aggregate(activity_nona$steps,by=list(activity_nona$date), FUN=sum)
@@ -20,7 +17,7 @@ daysum<-aggregate(activity_nona$steps,by=list(activity_nona$date), FUN=sum)
 6. calculate mean and median
 
 ```r
-barplot(daysum[,2],names.arg=daysum[,1],main="Steps by Date (NA removed)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
+hist(daysum$x, main="Steps per day (NA removed)", col="blue", xlab="# of steps")
 box()
 ```
 
@@ -91,7 +88,7 @@ impute.mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
 activity1 <- ddply(activity, ~interval, transform, steps  = impute.mean(steps))
 
 daysum1<-aggregate(activity1$steps,by=list(activity1$date), FUN=sum)
-barplot(daysum1[,2],names.arg=daysum1[,1],main="Steps by Date (NA replaced)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
+hist(daysum1$x, main="Steps per day (NA removed)", col="green", xlab="# of steps")
 box()
 ```
 

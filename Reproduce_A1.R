@@ -1,10 +1,12 @@
 setwd("c://temp")
+par(mfrow = c(1,1), mar=c(6,8,2,4) )
 activity <- read.csv("activity.csv")
 
 activity_nona <- na.omit(activity)
 daysum<-aggregate(activity_nona$steps,by=list(activity_nona$date), FUN=sum)
-barplot(daysum[,2],names.arg=daysum[,1],main="Steps by Date (NA removed)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
-box()
+#barplot(daysum[,2],names.arg=daysum[,1],main="Steps by Date (NA removed)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
+hist(daysum$x, main="Steps per day (NA removed)", col="blue", xlab="# of steps")
+
 mean_act<-mean(daysum[,2])
 median_act<-median(daysum[,2])
 segments(-5,mean_act,70,mean_act,col="Green")
@@ -15,12 +17,14 @@ plot(timesum[,1],timesum[,2],type="l",main="Steps by Time",xlab="Time", ylab="St
 
 missingvalues = dim(activity)[1]-dim(activity_nona)[1]
 
+library (plyr)
 impute.mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
 activity1 <- ddply(activity, ~interval, transform, steps  = impute.mean(steps))
 
 daysum1<-aggregate(activity1$steps,by=list(activity1$date), FUN=sum)
-barplot(daysum1[,2],names.arg=daysum1[,1],main="Steps by Date (NA replaced)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
-box()
+#barplot(daysum1[,2],names.arg=daysum1[,1],main="Steps by Date (NA replaced)", col="blue", xlab="Date", ylab="Steps", ylim=c(0,25000))
+hist(daysum1$x, main="Steps per day (NA removed)", col="blue", xlab="# of steps")
+
 mean_act1<-mean(daysum1[,2])
 median_act1<-median(daysum1[,2])
 
